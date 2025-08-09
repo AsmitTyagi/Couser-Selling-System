@@ -1,0 +1,41 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/auth/**, /user/**
+
+        - id: course-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/courses/**
+
+        - id: purchase-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/purchase/**
+
+        - id: payment-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/payments/**
+
+        - id: notification-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/notify/**
+
+        - id: review-rating-service
+          uri: http://localhost:8086
+          predicates:
+            - Path=/reviews/**
+jwt:
+  secret: mySecretJwtKey
